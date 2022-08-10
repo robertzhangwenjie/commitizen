@@ -1,7 +1,7 @@
 /*
  * @Author: robert zhang <robertzhangwenjie@gmail.com>
  * @Date: 2022-08-07 18:49:50
- * @LastEditTime: 2022-08-07 19:40:45
+ * @LastEditTime: 2022-08-10 15:07:23
  * @LastEditors: robert zhang
  * @Description:
  */
@@ -14,11 +14,12 @@ import (
 )
 
 func Commit(dryRun bool) error {
-	if !git.IsInGitRepository() {
+	currentDir := "."
+	if !git.IsGitRepository(currentDir) {
 		return fmt.Errorf("not in git repository")
 	}
 
-	if !git.HasStagedFiles() {
+	if !git.HasStagedFiles(currentDir) {
 		return fmt.Errorf("no staged files to commit")
 	}
 
