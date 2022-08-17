@@ -8,6 +8,7 @@ clean:
 install:
 	${BIN} install
 
+.PHONY: commit
 commit:
 	@go run main.go
 
