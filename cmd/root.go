@@ -1,7 +1,7 @@
 /*
  * @Author: robert zhang <robertzhangwenjie@gmail.com>
  * @Date: 2022-08-07 11:20:22
- * @LastEditTime: 2022-08-08 11:45:47
+ * @LastEditTime: 2022-08-22 10:22:03
  * @LastEditors: robert zhang
  * @Description:
  */
@@ -23,8 +23,7 @@ func NewRootCmd(name string) *cobra.Command {
 		SilenceErrors: true,
 		SilenceUsage:  true,
 	}
-	cmd.AddCommand(NewInstallCmd())
+	cmd.AddCommand(NewInstallCmd(), NewVersionCmd())
 	cmd.Flags().BoolVar(&dryRun, "dry-run", dryRun, "preview result")
-
 	return cmd
 }
