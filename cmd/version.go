@@ -1,7 +1,7 @@
 /*
  * @Author: robert zhang <robertzhangwenjie@gmail.com>
  * @Date: 2022-08-22 10:09:33
- * @LastEditTime: 2022-08-22 10:24:34
+ * @LastEditTime: 2022-08-23 15:03:44
  * @LastEditors: robert zhang
  * @Description:
  */
@@ -14,7 +14,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func NewVersionCmd() *cobra.Command {
+func newCmdVersion() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "version",
 		Short: "print tool version",

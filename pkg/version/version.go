@@ -1,7 +1,7 @@
 /*
  * @Author: robert zhang <robertzhangwenjie@gmail.com>
  * @Date: 2022-08-22 10:02:39
- * @LastEditTime: 2022-08-22 10:27:28
+ * @LastEditTime: 2022-08-22 10:53:08
  * @LastEditors: robert zhang
  * @Description:
  */
@@ -29,7 +29,7 @@ var (
 
 // Info contains versioning information.
 type Info struct {
-	GitVersion   string `json:"GitVersion"`
+	GitVersion   string `json:"GitVersion,omitempty"`
 	GitCommit    string `json:"GitCommit"`
 	GitTreeState string `json:"GitTreeState"`
 	BuildTime    string `json:"BuildDate"`

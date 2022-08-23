@@ -23,7 +23,7 @@ func NewRootCmd(name string) *cobra.Command {
 		SilenceErrors: true,
 		SilenceUsage:  true,
 	}
-	cmd.AddCommand(NewInstallCmd(), NewVersionCmd())
+	cmd.AddCommand(newCmdInstall(), newCmdVersion())
 	cmd.Flags().BoolVar(&dryRun, "dry-run", dryRun, "preview result")
 	return cmd
 }

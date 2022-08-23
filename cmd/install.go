@@ -1,7 +1,7 @@
 /*
  * @Author: robert zhang <robertzhangwenjie@gmail.com>
  * @Date: 2022-08-07 11:04:45
- * @LastEditTime: 2022-08-08 11:46:01
+ * @LastEditTime: 2022-08-23 15:03:12
  * @LastEditors: robert zhang
  * @Description:
  */
@@ -15,7 +15,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func NewInstallCmd() *cobra.Command {
+func newCmdInstall() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "install",
 		Short: "install git-cz command",
