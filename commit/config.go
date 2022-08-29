@@ -1,11 +1,71 @@
 /*
  * @Author: robert zhang <robertzhangwenjie@gmail.com>
  * @Date: 2022-08-04 17:12:31
- * @LastEditTime: 2022-08-10 16:55:52
+ * @LastEditTime: 2022-08-29 11:51:15
  * @LastEditors: robert zhang
  * @Description:
  */
 package commit
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"path/filepath"
+
+	"github.com/robertzhangwenjie/commitizen/git"
+)
+
+var configName = ".git-czrc"
+
+type messageConfig struct {
+	Template string
+	Items    []*Form
+}
+
+func loadConfig() (*messageConfig, error) {
+	var msgConfig = new(messageConfig)
+
+	// 如果当前git仓库根目录下拥有configFile,则优先使用它作为配置文件
+	// loadConfig
+	gitRoot, _ := git.GetCurrentRepositoryRoot()
+	path, config, err := getConfigIn(gitRoot)
+	if err == nil {
+		err := json.Unmarshal(config, &msgConfig)
+		if err != nil {
+			return msgConfig, fmt.Errorf("config %s is not valid: %v", path, err)
+		}
+		return msgConfig, nil
+	}
+
+	// 如果git根目录下没有，家目录下有配置文件，则使用家目录下的配置文件
+	homePath, err := os.UserHomeDir()
+	if err == nil {
+		path, config, err := getConfigIn(homePath)
+		if err == nil {
+			err := json.Unmarshal(config, &msgConfig)
+			if err != nil {
+				return msgConfig, fmt.Errorf("config %s is not valid: %v", path, err)
+			}
+			return msgConfig, nil
+		}
+	}
+
+	// 缺省配置
+	err = json.Unmarshal([]byte(defaultConfig), &msgConfig)
+	return msgConfig, err
+}
+
+// getConfigIn return the config contenct if config exists
+func getConfigIn(path string) (string, []byte, error) {
+	configPath := filepath.Join(path, configName)
+	config, err := os.ReadFile(configPath)
+	// 如果家目录下有配置文件，且git仓库根目录下没有，则使用家目录下的配置文件
+	if err != nil {
+		return configPath, nil, err
+	}
+	return configPath, config, nil
+}
 
 var selectQuestionTemplate = `
 {{- define "option"}}

@@ -1,7 +1,7 @@
 /*
  * @Author: robert zhang <robertzhangwenjie@gmail.com>
  * @Date: 2022-08-07 18:14:41
- * @LastEditTime: 2022-08-10 15:06:26
+ * @LastEditTime: 2022-08-29 11:43:34
  * @LastEditors: robert zhang
  * @Description:
  */
@@ -28,6 +28,13 @@ func IsGitRepository(dir string) bool {
 	cmd.Dir = dir
 	_, err := cmd.Output()
 	return err == nil
+}
+
+// GetRepositoryRoot get the git root path to which the dir belongs
+func GetCurrentRepositoryRoot() (path string, err error) {
+	cmd := exec.Command("git", "rev-parse", "--show-toplevel")
+	output, err := cmd.Output()
+	return strings.TrimSpace(string((output))), err
 }
 
 // HasStagedFiles determine whether has changes to be committed

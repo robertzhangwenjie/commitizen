@@ -1,7 +1,7 @@
 /*
  * @Author: robert zhang <robertzhangwenjie@gmail.com>
  * @Date: 2022-08-05 11:52:41
- * @LastEditTime: 2022-08-10 16:56:47
+ * @LastEditTime: 2022-08-29 11:30:41
  * @LastEditors: robert zhang
  * @Description:
  */
@@ -9,7 +9,7 @@ package commit
 
 import (
 	"bytes"
-	"encoding/json"
+	"fmt"
 	"log"
 	"strings"
 	"text/template"
@@ -28,11 +28,6 @@ type Form struct {
 type SelectOption struct {
 	Name string
 	Desc string
-}
-
-type messageConfig struct {
-	Template string
-	Items    []*Form
 }
 
 // fill out the form
@@ -71,9 +66,9 @@ func fillOutForm() ([]byte, error) {
 
 // loadForm load the from with messgaeConfig
 func loadForm() (qs []*survey.Question, template string, err error) {
-	var msgConfig = new(messageConfig)
-	if err = json.Unmarshal([]byte(defaultConfig), &msgConfig); err != nil {
-		return nil, "", err
+	msgConfig, err := loadConfig()
+	if err != nil {
+		return nil, "", fmt.Errorf("load config failed: %v", err)
 	}
 
 	// customize template for showing multiline's answer in new line
