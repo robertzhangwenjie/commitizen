@@ -21,7 +21,7 @@ clean:
 	@echo "========> Cleaning all build output"
 	@rm -rvf ${OUTPUT}
 
-install:
+install: build
 	${BIN} install
 
 .PHONY: commit
@@ -30,6 +30,9 @@ commit:
 
 build: clean
 	go build ${GO_BUILD_FLAGS} -o ${BIN}
+
+dryRun: build
+	@${BIN} --dry-run
 
 test:
 	@echo "========> Running all tests"
