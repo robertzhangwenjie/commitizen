@@ -1,3 +1,13 @@
+<!--
+ * @Author: robert zhang <robertzhangwenjie@gmail.com>
+ * @Date: 2022-09-01 16:41:59
+ * @LastEditTime: 2022-09-02 11:09:10
+ * @LastEditors: robert zhang
+ * @Description: 
+-->
+# Commitizen
+A git commit message generator for standardizing our commit msg
+
 # Getting Started
 
 ## Installation with source code
