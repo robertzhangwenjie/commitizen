@@ -37,3 +37,13 @@ dryRun: build
 test:
 	@echo "========> Running all tests"
 	@go test ./... -v
+
+test.coverage: COVERAGE_FILE := coverage.out
+
+test.coverage: tools.gocov
+	@go test ./... -v -cover -coverprofile=${COVERAGE_FILE}
+	@gocov convert ${COVERAGE_FILE} | gocov-xml > cover.xml
+
+tools.gocov:
+	@go install github.com/AlekSi/gocov-xml@latest
+	@go install github.com/axw/gocov/gocov@latest

@@ -1,3 +1,4 @@
 .vscode
 _output
 .DS_Store
+cover*
