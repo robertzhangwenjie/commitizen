@@ -1,11 +1,5 @@
-<!--
- * @Author: robert zhang <robertzhangwenjie@gmail.com>
- * @Date: 2022-09-01 16:41:59
- * @LastEditTime: 2022-09-02 11:09:10
- * @LastEditors: robert zhang
- * @Description: 
--->
 # Commitizen
+[![Makefile CI](https://github.com/robertzhangwenjie/commitizen/actions/workflows/makefile.yml/badge.svg)](https://github.com/robertzhangwenjie/commitizen/actions/workflows/makefile.yml)  
 A git commit message generator for standardizing our commit msg
 
 # Getting Started
@@ -19,7 +13,7 @@ Git SubCommand installed successfully, run with "git cz".
 ```
 
 # Usage
-`git cz`
+```git cz```
 ![git-cz](docs/images/git-cz.png)
 
 # Configuration
