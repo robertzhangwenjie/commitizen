@@ -1,5 +1,7 @@
 # Commitizen
-[![Makefile CI](https://github.com/robertzhangwenjie/commitizen/actions/workflows/makefile.yml/badge.svg)](https://github.com/robertzhangwenjie/commitizen/actions/workflows/makefile.yml)  
+[![Makefile CI](https://github.com/robertzhangwenjie/commitizen/actions/workflows/test.yml/badge.svg)](https://github.com/robertzhangwenjie/commitizen/actions/workflows/test.yml)
+[![codecov](https://codecov.io/gh/robertzhangwenjie/commitizen/branch/main/graph/badge.svg?token=eKac7A3mvw)](https://codecov.io/gh/robertzhangwenjie/commitizen)
+
 A git commit message generator for standardizing our commit msg
 
 # Getting Started
