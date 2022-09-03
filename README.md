@@ -22,7 +22,13 @@ git cz
 
 ![git-cz](docs/images/git-cz.png)
 
-# Usage
+## Commit with dryRun mode
+just preview your commit msg without actually commit it
+```shell
+git cz --dry-run
+```
+
+# Help
 ```shell
 Usage:
   commitizen [flags]
@@ -38,11 +44,12 @@ Flags:
       --dry-run   preview result
   -h, --help      help for commitizen
 
-Use "commitizen [command] --help" for more information about a command.```
-
+Use "commitizen [command] --help" for more information about a command.
+```
 
 # Configuration
 You can customize your commit configuration to project root path or user home directory  with json file .git-czrc which format like below:
+
 ```json
 {
 	"items": [
@@ -104,3 +111,7 @@ You can customize your commit configuration to project root path or user home di
 }
 
 ```
+
+# References
+- [https://github.com/lintingzhen/commitizen-go](https://github.com/lintingzhen/commitizen-go)
+- [https://github.com/JosephNaberhaus/go-mitizen](https://github.com/JosephNaberhaus/go-mitizen)
