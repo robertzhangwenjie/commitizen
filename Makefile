@@ -29,6 +29,7 @@ commit:
 	@go run main.go
 
 build: clean
+	@echo "========> Building binary"
 	go build ${GO_BUILD_FLAGS} -o ${BIN}
 
 dryRun: build
