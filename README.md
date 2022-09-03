@@ -15,9 +15,31 @@ Checkout the project and run `make install`, the following output below indicate
 Git SubCommand installed successfully, run with "git cz".
 ```
 
-# Usage
-```git cz```
+## Commit with commitizen
+```shell
+git cz
+```
+
 ![git-cz](docs/images/git-cz.png)
+
+# Usage
+```shell
+Usage:
+  commitizen [flags]
+  commitizen [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  help        Help about any command
+  install     install git-cz command
+  version     print tool version
+
+Flags:
+      --dry-run   preview result
+  -h, --help      help for commitizen
+
+Use "commitizen [command] --help" for more information about a command.```
+
 
 # Configuration
 You can customize your commit configuration to project root path or user home directory  with json file .git-czrc which format like below:
