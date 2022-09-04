@@ -1,5 +1,5 @@
 # Commitizen
-[![Makefile CI](https://github.com/robertzhangwenjie/commitizen/actions/workflows/test.yml/badge.svg)](https://github.com/robertzhangwenjie/commitizen/actions/workflows/test.yml)
+[![ci](https://github.com/robertzhangwenjie/commitizen/actions/workflows/ci.yml/badge.svg)](https://github.com/robertzhangwenjie/commitizen/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/robertzhangwenjie/commitizen/branch/main/graph/badge.svg?token=eKac7A3mvw)](https://codecov.io/gh/robertzhangwenjie/commitizen)
 [![Go Report Card](https://goreportcard.com/badge/github.com/robertzhangwenjie/commitizen)](https://goreportcard.com/report/github.com/robertzhangwenjie/commitizen)
 
