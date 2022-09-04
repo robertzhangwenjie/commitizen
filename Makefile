@@ -1,21 +1,26 @@
 OUTPUT := _output
 BIN := ${OUTPUT}/commitizen
 
-GO_VERSION := $(word 3, $(shell go version))
-GIT_COMMIT := $(shell git rev-parse --short HEAD)
-PACKAGE_VERSION := $(shell git tag | tail -1)
+GoVersion := $(word 3, $(shell go version))
+GitCommit := $(shell git rev-parse --short HEAD)
+BuildTime := $(shell date "+%Y-%m-%d %H:%M:%S")
+GitVersion := $(shell git tag | tail -1)
 VERSION_PACKAGE := github.com/robertzhangwenjie/commitizen/pkg/version
 
-GIT_TREE_STATE="dirty"
+GIT_TREE_STATE=dirty
 ifeq (, $(shell git status --porcelain 2>/dev/null))
-	GIT_TREE_STATE="clean"
+	GIT_TREE_STATE=clean
 endif
+
+export GoVersion GitCommit PACKAGE_VERSION GIT_TREE_STATE BuildTime GitVersion
+
 # build args
-GO_BUILD_FLAGS += -ldflags "-X '${VERSION_PACKAGE}.GitCommit=${GIT_COMMIT}' \
-                 -X '${VERSION_PACKAGE}.BuildTime=`date "+%Y-%m-%d %H:%M:%S"`' \
-                 -X '${VERSION_PACKAGE}.GoVersion=${GO_VERSION}' \
+GO_BUILD_FLAGS += -ldflags "-X '${VERSION_PACKAGE}.GitCommit=${GitCommit}' \
+                 -X '${VERSION_PACKAGE}.BuildTime=${BuildTime}' \
+                 -X '${VERSION_PACKAGE}.GoVersion=${GoVersion}' \
                  -X '${VERSION_PACKAGE}.GitTreeState=${GIT_TREE_STATE}' \
-                 -X '${VERSION_PACKAGE}.GitVersion=${PACKAGE_VERSION}'"
+                 -X '${VERSION_PACKAGE}.GitVersion=${GitVersion}'"
+
 
 clean:
 	@echo "========> Cleaning all build output"
@@ -31,6 +36,9 @@ commit:
 build: clean
 	@echo "========> Building binary"
 	go build ${GO_BUILD_FLAGS} -o ${BIN}
+
+build.multiarch:
+	@goreleaser build --snapshot --rm-dist
 
 dryRun: build
 	@${BIN} --dry-run

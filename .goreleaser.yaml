@@ -5,7 +5,7 @@ builds:
   - env:
       - CGO_ENABLED=0
       - VERSION_PACKAGE=github.com/robertzhangwenjie/commitizen/pkg/version
-
+      - GIT_TREE_STATE=clean
     goos:
       - linux
       - windows
@@ -15,6 +15,7 @@ builds:
       - -X '{{.Env.VERSION_PACKAGE}}.BuildTime={{.Env.BuildTime}}'
       - -X '{{.Env.VERSION_PACKAGE}}.GoVersion={{.Env.GoVersion}}'
       - -X '{{.Env.VERSION_PACKAGE}}.GitVersion={{.Env.GitVersion}}'
+      - -X '{{.Env.VERSION_PACKAGE}}.GitTreeState={{.Env.GIT_TREE_STATE}}'
 archives:
   - replacements:
       darwin: Darwin
