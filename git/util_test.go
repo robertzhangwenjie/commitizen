@@ -1,16 +1,20 @@
 /*
  * @Author: robert zhang <robertzhangwenjie@gmail.com>
  * @Date: 2022-08-07 18:14:41
- * @LastEditTime: 2022-08-10 15:09:22
+ * @LastEditTime: 2022-09-04 11:20:49
  * @LastEditors: robert zhang
  * @Description:
  */
 package git
 
 import (
+	"os"
 	"os/exec"
+	"path/filepath"
 	"strings"
 	"testing"
+
+	. "github.com/glycerine/goconvey/convey"
 )
 
 func TestExecPath(t *testing.T) {
@@ -27,29 +31,25 @@ func TestExecPath(t *testing.T) {
 }
 
 func TestIsGitRepository(t *testing.T) {
-	testcases := []struct {
-		name string
-		path string
-		want bool
-	}{
-		{
-			name: "invalid path",
-			path: "ttttt/",
-			want: false,
-		},
-		{
-			name: "current path",
-			path: ".",
-			want: true,
-		},
-	}
-
-	for _, tc := range testcases {
-		t.Run(tc.name, func(t *testing.T) {
-			got := IsGitRepository(tc.path)
-			if got != tc.want {
-				t.Errorf("expected %v, got %v", tc.want, got)
-			}
+	Convey("Given a path", t, func() {
+		var path string
+		Convey("When it doestn't exist", func() {
+			path = "testdata/xxx"
+			Convey("Then should return false", func() {
+				So(IsGitRepository(path), ShouldBeFalse)
+			})
 		})
-	}
+
+		Convey("When it's a git repo", func() {
+			path = filepath.Join("testdata", "gitrepo")
+			if err := exec.Command("git", "init", path).Run(); err != nil {
+				t.Errorf("git init failed: %v", err)
+			}
+			defer os.RemoveAll(path)
+
+			Convey("Then should return true", func() {
+				So(IsGitRepository(path), ShouldBeTrue)
+			})
+		})
+	})
 }
