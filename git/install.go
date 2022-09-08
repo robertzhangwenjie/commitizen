@@ -1,7 +1,7 @@
 /*
  * @Author: robert zhang <robertzhangwenjie@gmail.com>
  * @Date: 2022-08-06 16:45:09
- * @LastEditTime: 2022-08-08 18:35:18
+ * @LastEditTime: 2022-09-08 23:14:42
  * @LastEditors: robert zhang
  * @Description:
  */
@@ -35,7 +35,12 @@ func copyFile(dstFilePath, srcFilePath string) (written int64, err error) {
 	}
 	defer src.Close()
 
-	dst, err := os.OpenFile(dstFilePath, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0755)
+	_, err = os.Stat(dstFilePath)
+	if err == nil {
+		os.Remove(dstFilePath)
+	}
+
+	dst, err := os.OpenFile(dstFilePath, os.O_RDWR|os.O_CREATE, 0755)
 	if err != nil {
 		return
 	}
