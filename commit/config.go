@@ -1,7 +1,7 @@
 /*
  * @Author: robert zhang <robertzhangwenjie@gmail.com>
  * @Date: 2022-08-04 17:12:31
- * @LastEditTime: 2022-08-29 11:51:15
+ * @LastEditTime: 2022-09-08 09:42:11
  * @LastEditors: robert zhang
  * @Description:
  */
@@ -19,8 +19,8 @@ import (
 var configName = ".git-czrc"
 
 type messageConfig struct {
-	Template string
-	Items    []*Form
+	Template string `json:"template"`
+	Items    []Form `json:"items"`
 }
 
 func loadConfig() (*messageConfig, error) {
@@ -29,24 +29,16 @@ func loadConfig() (*messageConfig, error) {
 	// 如果当前git仓库根目录下拥有configFile,则优先使用它作为配置文件
 	// loadConfig
 	gitRoot, _ := git.GetCurrentRepositoryRoot()
-	path, config, err := getConfigIn(gitRoot)
+	msgConfig, err := getConfigFrom(gitRoot)
 	if err == nil {
-		err := json.Unmarshal(config, &msgConfig)
-		if err != nil {
-			return msgConfig, fmt.Errorf("config %s is not valid: %v", path, err)
-		}
 		return msgConfig, nil
 	}
 
 	// 如果git根目录下没有，家目录下有配置文件，则使用家目录下的配置文件
 	homePath, err := os.UserHomeDir()
 	if err == nil {
-		path, config, err := getConfigIn(homePath)
+		msgConfig, err := getConfigFrom(homePath)
 		if err == nil {
-			err := json.Unmarshal(config, &msgConfig)
-			if err != nil {
-				return msgConfig, fmt.Errorf("config %s is not valid: %v", path, err)
-			}
 			return msgConfig, nil
 		}
 	}
@@ -56,15 +48,19 @@ func loadConfig() (*messageConfig, error) {
 	return msgConfig, err
 }
 
-// getConfigIn return the config contenct if config exists
-func getConfigIn(path string) (string, []byte, error) {
+func getConfigFrom(path string) (*messageConfig, error) {
+	var config = new(messageConfig)
+
 	configPath := filepath.Join(path, configName)
-	config, err := os.ReadFile(configPath)
-	// 如果家目录下有配置文件，且git仓库根目录下没有，则使用家目录下的配置文件
+	data, err := os.ReadFile(configPath)
 	if err != nil {
-		return configPath, nil, err
+		return nil, fmt.Errorf("read file failed: %v", err)
 	}
-	return configPath, config, nil
+	err = json.Unmarshal(data, &config)
+	if err != nil {
+		return nil, fmt.Errorf("config %s is not valid: %v", path, err)
+	}
+	return config, nil
 }
 
 var selectQuestionTemplate = `

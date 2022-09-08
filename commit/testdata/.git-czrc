@@ -1,0 +1,25 @@
+{
+	"items": [
+		{
+			"name": "type",
+			"desc": "Select the type of change that you're committing:",
+			"form": "select",
+			"options": [
+				{ "name": "feat", "desc": "A new feature" },
+				{ "name": "fix", "desc": "A bug fix" }
+			],
+			"required": true
+		},
+		{
+			"name": "scope",
+			"desc": "Scope. Could be anything specifying place of the commit change (users, db, poll):",
+			"form": "input"
+		},
+		{
+			"name": "body",
+			"desc": "Body. Motivation for the change and contrast this with previous behavior:",
+			"form": "multiline"
+		}
+	],
+	"template": "{{.type}}{{with .scope}}({{.}}){{end}}: {{.subject}}{{with .body}}\n\n{{.}}{{end}}{{with .footer}}\n\n{{.}}{{end}}"
+}
