@@ -1,7 +1,7 @@
 /*
  * @Author: robert zhang <robertzhangwenjie@gmail.com>
  * @Date: 2022-08-05 11:52:41
- * @LastEditTime: 2022-08-29 11:30:41
+ * @LastEditTime: 2022-09-08 22:57:44
  * @LastEditors: robert zhang
  * @Description:
  */
@@ -32,7 +32,12 @@ type SelectOption struct {
 
 // fill out the form
 func fillOutForm() ([]byte, error) {
-	qs, tmpl, err := loadForm()
+	msgConfig, err := loadConfig()
+	if err != nil {
+		return nil, fmt.Errorf("load config failed: %v", err)
+	}
+
+	qs, tmpl, err := loadForm(msgConfig)
 	if err != nil {
 		return nil, err
 	}
@@ -51,6 +56,7 @@ func fillOutForm() ([]byte, error) {
 		}
 	}
 
+	// render template
 	t, err := template.New("").Parse(tmpl)
 	if err != nil {
 		return nil, err
@@ -65,12 +71,7 @@ func fillOutForm() ([]byte, error) {
 }
 
 // loadForm load the from with messgaeConfig
-func loadForm() (qs []*survey.Question, template string, err error) {
-	msgConfig, err := loadConfig()
-	if err != nil {
-		return nil, "", fmt.Errorf("load config failed: %v", err)
-	}
-
+func loadForm(msgConfig *messageConfig) (qs []*survey.Question, template string, err error) {
 	// customize template for showing multiline's answer in new line
 	survey.MultilineQuestionTemplate = multilineQuestionTemplate
 	// customize selectQuestionTemplate

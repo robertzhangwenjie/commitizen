@@ -1,7 +1,7 @@
 /*
  * @Author: robert zhang <robertzhangwenjie@gmail.com>
  * @Date: 2022-09-07 22:49:55
- * @LastEditTime: 2022-09-08 10:59:20
+ * @LastEditTime: 2022-09-08 11:22:56
  * @LastEditors: robert zhang
  * @Description:
  */
@@ -19,7 +19,7 @@ func Test_getConfigFrom(t *testing.T) {
 	Convey("Given a path", t, func() {
 		var path string
 		Convey("When the path contains a valid config named .git-czrc", func() {
-			path = filepath.Join("testdata")
+			path = filepath.Join("testdata", "valid")
 			Convey("Then should return a valid messageConfig", func() {
 				got, err := getConfigFrom(path)
 				want := &messageConfig{
@@ -56,5 +56,25 @@ func Test_getConfigFrom(t *testing.T) {
 				So(cmp.Equal(got, want), ShouldBeTrue)
 			})
 		})
+
+		Convey("When the path is not exists", func() {
+			path = filepath.Join("testdata", "noexist")
+			Convey("Then it won't get config and should be return err", func() {
+				config, err := getConfigFrom(path)
+				So(config, ShouldBeNil)
+				So(err, ShouldNotBeNil)
+			})
+
+		})
+
+		Convey("When the path contains a invalid json config named .git-czrc", func() {
+			path = filepath.Join("testdata", "invalid")
+			Convey("Then it shoud return err", func() {
+				config, err := getConfigFrom(path)
+				So(config, ShouldBeNil)
+				So(err, ShouldNotBeNil)
+			})
+		})
+
 	})
 }
