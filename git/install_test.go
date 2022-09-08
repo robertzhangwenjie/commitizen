@@ -1,7 +1,7 @@
 /*
  * @Author: robert zhang <robertzhangwenjie@gmail.com>
  * @Date: 2022-08-06 16:52:22
- * @LastEditTime: 2022-09-04 11:37:33
+ * @LastEditTime: 2022-09-08 10:59:11
  * @LastEditors: robert zhang
  * @Description:
  */
@@ -10,7 +10,7 @@ package git
 import (
 	"testing"
 
-	. "github.com/glycerine/goconvey/convey"
+	. "github.com/smartystreets/goconvey/convey"
 )
 
 func TestInstallSubCmd(t *testing.T) {

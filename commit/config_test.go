@@ -1,7 +1,7 @@
 /*
  * @Author: robert zhang <robertzhangwenjie@gmail.com>
  * @Date: 2022-09-07 22:49:55
- * @LastEditTime: 2022-09-08 09:50:37
+ * @LastEditTime: 2022-09-08 10:59:20
  * @LastEditors: robert zhang
  * @Description:
  */
@@ -11,8 +11,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	. "github.com/glycerine/goconvey/convey"
 	"github.com/google/go-cmp/cmp"
+	. "github.com/smartystreets/goconvey/convey"
 )
 
 func Test_getConfigFrom(t *testing.T) {

@@ -1,7 +1,7 @@
 /*
  * @Author: robert zhang <robertzhangwenjie@gmail.com>
  * @Date: 2022-08-07 18:14:41
- * @LastEditTime: 2022-09-04 11:20:49
+ * @LastEditTime: 2022-09-08 10:58:27
  * @LastEditors: robert zhang
  * @Description:
  */
@@ -14,7 +14,7 @@ import (
 	"strings"
 	"testing"
 
-	. "github.com/glycerine/goconvey/convey"
+	. "github.com/smartystreets/goconvey/convey"
 )
 
 func TestExecPath(t *testing.T) {
