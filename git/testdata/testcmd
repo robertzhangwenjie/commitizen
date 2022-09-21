@@ -1,7 +1,10 @@
 ###
  # @Author: robert zhang <robertzhangwenjie@gmail.com>
  # @Date: 2022-09-03 16:50:19
- # @LastEditTime: 2022-09-03 17:26:03
+ # @LastEditTime: 2022-09-21 20:18:47
  # @LastEditors: robert zhang
  # @Description: testfile for testing installCmd
 ### 
+
+#!/bin/bash
+echo "ok"

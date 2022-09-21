@@ -1,7 +1,7 @@
 /*
  * @Author: robert zhang <robertzhangwenjie@gmail.com>
  * @Date: 2022-08-07 18:49:50
- * @LastEditTime: 2022-09-08 22:50:20
+ * @LastEditTime: 2022-09-13 11:19:22
  * @LastEditors: robert zhang
  * @Description:
  */
@@ -12,9 +12,6 @@ import (
 
 	"github.com/robertzhangwenjie/commitizen/git"
 )
-
-type commit struct {
-}
 
 func Commit(dryRun bool) error {
 	currentDir := "."
