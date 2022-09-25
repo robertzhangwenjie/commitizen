@@ -1,7 +1,7 @@
 /*
  * @Author: robert zhang <robertzhangwenjie@gmail.com>
  * @Date: 2022-08-07 18:49:50
- * @LastEditTime: 2022-09-13 11:19:22
+ * @LastEditTime: 2022-09-25 22:51:52
  * @LastEditors: robert zhang
  * @Description:
  */
@@ -23,7 +23,16 @@ func Commit(dryRun bool) error {
 		return fmt.Errorf("no staged files to commit")
 	}
 
-	commitMsg, err := fillOutForm()
+	msgConfig, err := loadConfig()
+	if err != nil {
+		return fmt.Errorf("load config failed: %v", err)
+	}
+
+	qs, tmpl, err := loadForm(msgConfig)
+	if err != nil {
+		return err
+	}
+	commitMsg, err := fillOutForm(qs, tmpl)
 	if err != nil {
 		return err
 	}

@@ -1,7 +1,7 @@
 /*
  * @Author: robert zhang <robertzhangwenjie@gmail.com>
  * @Date: 2022-08-05 11:52:41
- * @LastEditTime: 2022-09-08 22:57:44
+ * @LastEditTime: 2022-09-25 22:51:43
  * @LastEditors: robert zhang
  * @Description:
  */
@@ -9,7 +9,6 @@ package commit
 
 import (
 	"bytes"
-	"fmt"
 	"log"
 	"strings"
 	"text/template"
@@ -31,19 +30,10 @@ type SelectOption struct {
 }
 
 // fill out the form
-func fillOutForm() ([]byte, error) {
-	msgConfig, err := loadConfig()
-	if err != nil {
-		return nil, fmt.Errorf("load config failed: %v", err)
-	}
-
-	qs, tmpl, err := loadForm(msgConfig)
-	if err != nil {
-		return nil, err
-	}
+func fillOutForm(qs []*survey.Question, tmpl string) ([]byte, error) {
 
 	answers := map[string]interface{}{}
-	if err = survey.Ask(qs, &answers); err != nil {
+	if err := survey.Ask(qs, &answers); err != nil {
 		return nil, err
 	}
 
