@@ -1,7 +1,7 @@
 /*
  * @Author: robert zhang <robertzhangwenjie@gmail.com>
  * @Date: 2022-08-06 16:52:22
- * @LastEditTime: 2022-09-22 10:11:03
+ * @LastEditTime: 2023-03-04 12:11:28
  * @LastEditors: robert zhang
  * @Description:
  */
@@ -16,6 +16,19 @@ import (
 
 	. "github.com/smartystreets/goconvey/convey"
 )
+
+func TestInstallSubCmd(t *testing.T) {
+	Convey("Given a cmdFilePath", t, func() {
+		cmdFilePath := filepath.Join("testdata", "testcmd")
+		Convey("When install as git subCmd", func() {
+			path, err := InstallSubCmd(cmdFilePath, "test")
+			Convey("Then it shoud install successfully", func() {
+				So(err, ShouldBeNil)
+				So(path, ShouldNotBeEmpty)
+			})
+		})
+	})
+}
 
 func Test_copyFile(t *testing.T) {
 	Convey("Given a temporary dir", t, func() {
